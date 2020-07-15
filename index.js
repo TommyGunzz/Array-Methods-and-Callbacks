@@ -93,18 +93,17 @@ console.log(getWinnersByYear(getYears(getFinals(fifaData)), getWinners(getFinals
 function getAverageGoals(data) {
     let arrHome = data.reduce(function(accumulator, item){
         return accumulator + item["Home Team Goals"]
-    }, 0);
+        }, 0);
     let arrAway = data.reduce(function(accumulator, item){
         return accumulator + item["Away Team Goals"]
-    }, 0);
-    
-    return { 
+        }, 0);
+
+      return { 
         "Home average":(arrHome / data.length).toFixed(2),
         "Away average":(arrAway / data.length).toFixed(2)
+        };
     };
-    };
-
-    console.log(getAverageGoals(fifaData));
+console.log(getAverageGoals(fifaData));
 
     
 /// STRETCH 🥅 //
