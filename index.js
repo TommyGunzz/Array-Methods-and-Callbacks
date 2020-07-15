@@ -58,9 +58,9 @@ function getWinners(getFinals){
      getFinals.map(function(data) { 
       
          if (data["Home Team Goals"] > data["Away Team Goals"]) {
-          winners.push(data["Home Team Name"],"Is Winner!")}
+          winners.push(data["Home Team Name"])}
            else if (data["Home Team Goals"] < data["Away Team Goals"] ) {
-          winners.push(data["Away Team Name"],"Is Winner!")};
+          winners.push(data["Away Team Name"])};
       });
      return winners;
            };
@@ -79,18 +79,34 @@ function getWinnersByYear(years, getWinners) {
     })
     return winners;
 };
+/*console.log(getYears(fifaData, getFinals).length === getWinners(fifaData, getFinals).length);*/
+
 console.log(getWinnersByYear(getYears(getFinals(fifaData)), getWinners(getFinals(fifaData))));
 
+
 /* Task 7: Write a function called `getAverageGoals` that accepts a parameter `data` and returns the the average number of home team goals and away team goals scored per match (Hint: use .reduce and do this in 2 steps) */
+// notes
+//const arrAvg = arr => arr.reduce((a,b) => a + b, 0) / arr.length
+// arrAvg([20, 10, 5, 10]) -> 11.25
+// ------------
 
 function getAverageGoals(data) {
+    let arrHome = data.reduce(function(accumulator, item){
+        return accumulator + item["Home Team Goals"]
+    }, 0);
+    let arrAway = data.reduce(function(accumulator, item){
+        return accumulator + item["Away Team Goals"]
+    }, 0);
+    
+    return { 
+        "Home average":(arrHome / data.length).toFixed(2),
+        "Away average":(arrAway / data.length).toFixed(2)
+    };
+    };
 
-    /* code here */
+    console.log(getAverageGoals(fifaData));
 
-};
-
-getAverageGoals();
-
+    
 /// STRETCH 🥅 //
 
 /* Stretch 1: Create a function called `getCountryWins` that takes the parameters `data` and `team initials` and returns the number of world cup wins that country has had. 
@@ -129,4 +145,4 @@ function badDefense(/* code here */) {
 badDefense();
 
 /* If you still have time, use the space below to work on any stretch goals of your chosing as listed in the README file. */
-    
+  
